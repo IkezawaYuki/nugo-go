@@ -12,8 +12,8 @@ import (
 
 func FetchMostPopularVideos() echo.HandlerFunc{
 	return func(c echo.Context) error {
-		key := os.Getenv("youtube_api_key")
-		
+		key := os.Getenv("API_KEY")
+
 		ctx := context.Background()
 
 		yts, err := youtube.NewService(ctx, option.WithAPIKey(key))
