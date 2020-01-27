@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/IkezawaYuki/nugo-go/middlewares"
 	"github.com/IkezawaYuki/nugo-go/routes"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
@@ -23,6 +24,7 @@ func main(){
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.CORS())
+	e.Use(middlewares.YoutubeService())
 	routes.Init(e)
 
 	e.Logger.Fatal(e.Start(":8080"))
