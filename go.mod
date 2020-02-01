@@ -3,6 +3,7 @@ module github.com/IkezawaYuki/nugo-go
 go 1.13
 
 require (
+	firebase.google.com/go v3.12.0+incompatible // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.7 // indirect

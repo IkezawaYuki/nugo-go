@@ -11,9 +11,10 @@ func SearchVideos() echo.HandlerFunc{
 	return func(c echo.Context) error {
 		yts := c.Get("yts").(*youtube.Service)
 		query := c.QueryParam("q")
+
 		call := yts.Search.List("id,snippet").Q(query).MaxResults(3)
 		pageToken := c.QueryParam("pageToken")
-		if len(pageToken) > 0 || pageToken != "undefined"{
+		if pageToken != "undefined"{
 			call = call.PageToken(pageToken)
 		}
 
