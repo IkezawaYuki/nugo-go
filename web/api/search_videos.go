@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
 	"github.com/sirupsen/logrus"
 	"github.com/valyala/fasthttp"
@@ -12,9 +13,10 @@ func SearchVideos() echo.HandlerFunc{
 		yts := c.Get("yts").(*youtube.Service)
 		query := c.QueryParam("q")
 
-		call := yts.Search.List("id,snippet").Q(query).MaxResults(3)
+		call := yts.Search.List("id,snippet").Q(query).Type("video").MaxResults(3)
 		pageToken := c.QueryParam("pageToken")
-		if pageToken != "undefined"{
+
+		if len(pageToken) > 0 {
 			call = call.PageToken(pageToken)
 		}
 
@@ -22,6 +24,7 @@ func SearchVideos() echo.HandlerFunc{
 		if err != nil{
 			logrus.Fatalf("Error calling Youtube API: %v", err)
 		}
+		fmt.Println(res)
 		return c.JSON(fasthttp.StatusOK, res)
 	}
 }
